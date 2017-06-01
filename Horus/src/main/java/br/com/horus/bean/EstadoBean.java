@@ -82,7 +82,7 @@ public class EstadoBean implements Serializable {
 			Messages.addGlobalInfo("Estado removido com sucesso");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar o Estado.");
+			Messages.addGlobalError("Erro ao Remover o Estado.");
 			error.printStackTrace();
 		}
 	}

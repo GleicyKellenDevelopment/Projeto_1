@@ -9,32 +9,85 @@
 	<title>Hórus Informática</title>
 </h:head>
 <h:body>
-	<h:form>
+
+	<p:growl id="mensagem" />
+
+	<h:form id="listagemMarcas">
 		<p:panel header="Listagem das Marcas">
-			<p:dataTable emptyMessage="Nenhum Registro Encontrado."
-				paginator="true">
+			<p:dataTable id="tabelaMarcas"
+				emptyMessage="Nenhum Registro Encontrado." paginator="true" rows="5"
+				value="#{marcaBean.listarMarcas}" var="marca">
+
 				<f:facet name="header">
 					<p:commandButton value="Adicionar"
-						oncomplete="PF('adicionarMarca').show();" />
+						oncomplete="PF('adicionarMarca').show();"
+						actionListener="#{marcaBean.novo}"
+						update=":mensagem :marcaForm:camposMarca">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
 				</f:facet>
-				<p:column headerText="Nome"></p:column>
-				<p:column headerText="Opções"></p:column>
+
+				<p:column headerText="Marca" sortBy="#{marca.nome_marca}"
+					filterBy="#{marca.nome_marca}">
+					<h:outputText value="#{marca.nome_marca}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{marcaBean.editar}"
+						update=":marcaForm:camposMarca"
+						oncomplete="PF('adicionarMarca').show();">
+						<f:attribute name="marcaSelecionado" value="#{marca}" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+
+
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{marcaBean.excluir}"
+						update=":mensagem :listagemMarcas:tabelaMarcas">
+						<p:confirm header="Excluir"
+							message="Deseja realmente excluir esta Marca?"
+							icon="ui-icon-alert" />
+						<f:attribute name="marcaSelecionado" value="#{marca}" />
+					</p:commandButton>
+
+				</p:column>
+
 			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
 		</p:panel>
 	</h:form>
 
 	<p:dialog header="Adicionar Marca" widgetVar="adicionarMarca"
 		draggable="false" resizable="false" modal="true">
-		<h:form>
-			<h:panelGrid columns="2">
+
+		<h:form id="marcaForm">
+
+			<h:panelGrid columns="2" id="camposMarca">
 				<p:outputLabel value="Nome:" />
-				<p:inputText size="20" maxlength="50" />
+				<p:inputText size="20" maxlength="50" required="true"
+					requiredMessage="Campo 'Nome' é Obrigatório."
+					value="#{marcaBean.marca.nome_marca}" />
 			</h:panelGrid>
+
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
-				<p:commandButton value="Cancelar" oncomplete="PF('adicionarMarca').hide();"/>
+				<p:commandButton value="Salvar" 
+					actionListener="#{marcaBean.salvar}"
+					update=":mensagem :marcaForm:camposMarca :listagemMarcas:tabelaMarcas" />
+				<p:commandButton value="Cancelar"
+					oncomplete="PF('adicionarMarca').hide();" />
 			</h:panelGrid>
 		</h:form>
+
 	</p:dialog>
 
 </h:body>

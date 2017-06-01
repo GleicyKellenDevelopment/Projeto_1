@@ -17,6 +17,7 @@
 			<p:dataTable id="tabelaProdutos"
 				emptyMessage="Nenhum Registro Encontrado." paginator="true"
 				var="produto" rows="5" value="#{produtoBean.listarProdutos}">
+				
 				<f:facet name="header">
 					<p:commandButton value="Adicionar"
 						actionListener="#{produtoBean.novo}"
@@ -44,7 +45,9 @@
 
 				<p:column headerText="Preço" sortBy="#{produto.preco}"
 					filterBy="#{produto.preco}">
-					<h:outputText value="#{produto.preco}" />
+					<h:outputText value="#{produto.preco}" >
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Opções">
@@ -76,11 +79,13 @@
 				<p:commandButton value="Não" type="button"
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
+			
 		</p:panel>
 	</h:form>
 
 	<p:dialog header="Adicionar Produto" widgetVar="adicionarProduto"
 		draggable="false" resizable="false" modal="true">
+		
 		<h:form id="produtoForm">
 			<h:panelGrid columns="2" id="camposProduto">
 
@@ -116,6 +121,7 @@
 					converterMessage="O valor no campo 'Preço' é inválido"
 					validatorMessage="O valor inserido no campo 'Preço' é inválido. ( 0.05 a 9999.99 )">
 					<f:validateDoubleRange minimum="0.05" maximum="9999.99"/>
+					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
 				</p:inputText>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
@@ -125,7 +131,9 @@
 				<p:commandButton value="Cancelar"
 					oncomplete="PF('adicionarProduto').hide();" />
 			</h:panelGrid>
+		
 		</h:form>
+				
 	</p:dialog>
 
 </h:body>
