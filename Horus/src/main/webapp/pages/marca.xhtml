@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Hórus Informática</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Listagem das Marcas">
+			<p:dataTable emptyMessage="Nenhum Registro Encontrado."
+				paginator="true">
+				<f:facet name="header">
+					<p:commandButton value="Adicionar"
+						oncomplete="PF('adicionarMarca').show();" />
+				</f:facet>
+				<p:column headerText="Nome"></p:column>
+				<p:column headerText="Opções"></p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Adicionar Marca" widgetVar="adicionarMarca"
+		draggable="false" resizable="false" modal="true">
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome:" />
+				<p:inputText size="20" maxlength="50" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Cancelar" oncomplete="PF('adicionarMarca').hide();"/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</h:body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Hórus Informática</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Listagem de Clientes">
+			<p:dataTable emptyMessage="Nenhum Registro Encontrado."
+				paginator="true">
+				<f:facet name="header">
+					<p:commandButton value="Adicionar"
+						oncomplete="PF('adicionarCliente').show();" />
+				</f:facet>
+				<p:column headerText="Nome"></p:column>
+				<p:column headerText="CPF"></p:column>
+				<p:column headerText="Data de Cadastro"></p:column>
+				<p:column headerText="Status do Cliente"></p:column>
+				<p:column headerText="Opções"></p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Adicionar Cliente" widgetVar="adicionarCliente"
+		draggable="false" resizable="false" modal="true">
+		<h:form>
+			<h:panelGrid columns="2">
+				
+				<p:outputLabel value="Cliente:" />
+				<p:selectOneMenu filter="true">
+					<f:selectItem itemValue="" itemLabel="Selecione um Cliente:" />
+				</p:selectOneMenu>
+			
+				<p:outputLabel value="Data de Cadastro:" />
+				<p:calendar />
+				
+				<p:outputLabel value="Status do Cliente:" />				
+				<p:selectBooleanCheckbox />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Cancelar"
+					oncomplete="PF('adicionarCliente').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</h:body>
+</html>
