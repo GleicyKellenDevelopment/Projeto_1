@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Hórus Informática</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Listagem de Funcionários">
+			<p:dataTable emptyMessage="Nenhum Registro Encontrado."
+				paginator="true">
+				<f:facet name="header">
+					<p:commandButton value="Adicionar"
+						oncomplete="PF('adicionarFuncionario').show();" />
+				</f:facet>
+				<p:column headerText="Nome"></p:column>
+				<p:column headerText="CPF"></p:column>
+				<p:column headerText="Data de Nascimento"></p:column>
+				<p:column headerText="Data de Admissão"></p:column>
+				<p:column headerText="Opções"></p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Adicionar Funcionário" widgetVar="adicionarFuncionario"
+		draggable="false" resizable="false" modal="true">
+		<h:form>
+			<h:panelGrid columns="2">
+				
+				<p:outputLabel value="Funcionário:" />
+				<p:selectOneMenu filter="true">
+					<f:selectItem itemValue="" itemLabel="Selecione um Funcionário:" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Data de Nascimento:" />
+				<p:calendar />
+				
+				<p:outputLabel value="Data de Admissão:" />
+				<p:calendar />
+				
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Cancelar"
+					oncomplete="PF('adicionarFuncionario').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</h:body>
+</html>
