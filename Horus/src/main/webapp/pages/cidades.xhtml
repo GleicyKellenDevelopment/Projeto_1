@@ -27,15 +27,15 @@
 							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 					</p:commandButton>
 				</f:facet>
+								
+				<p:column headerText="Cidade" sortBy="#{cidade.nome}"
+					filterBy="#{cidade.nome}">
+					<h:outputText value="#{cidade.nome}" />
+				</p:column>
 				
 				<p:column headerText="Estado" sortBy="#{cidade.estado.nome}"
 					filterBy="#{cidade.estado.nome}">
 					<h:outputText value="#{cidade.estado.nome}" />
-				</p:column>
-				
-				<p:column headerText="Cidade" sortBy="#{cidade.nome}"
-					filterBy="#{cidade.nome}">
-					<h:outputText value="#{cidade.nome}" />
 				</p:column>
 				
 				<p:column headerText="Opções">

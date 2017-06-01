@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.horus.util.HibernateUtil;
@@ -43,6 +44,23 @@ public class GenericDAO<Entidade> {
 
 		try {
 			Criteria consulta = sessao.createCriteria(classe);
+			List<Entidade> lista = consulta.list();
+			return lista;
+
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Entidade> listar(String camposOrdenados) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			Criteria consulta = sessao.createCriteria(classe);
+			consulta.addOrder(Order.asc(camposOrdenados));
 			List<Entidade> lista = consulta.list();
 			return lista;
 

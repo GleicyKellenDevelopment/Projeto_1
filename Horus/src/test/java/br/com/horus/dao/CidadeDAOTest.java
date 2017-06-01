@@ -31,7 +31,7 @@ public class CidadeDAOTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void listar() {
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		List<Cidade> listarCidades = cidadeDAO.listar();
@@ -97,6 +97,23 @@ public class CidadeDAOTest {
 
 		cidadeDAO.excluir(cidade);
 
+	}
+	
+	@Test
+	public void buscarPorEstado() {
+		Long estadoCodigo = 3L;
+		
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		List<Cidade> resultado = cidadeDAO.buscarPorEstado(estadoCodigo);
+
+		for (Cidade cidade : resultado) {
+			System.out.println("Código da Cidade: " + cidade.getId());
+			System.out.println("Nome da Cidade: " + cidade.getNome());
+			System.out.println("Código do Estado: " + cidade.getEstado().getId());
+			System.out.println("Sigla do Estado: " + cidade.getEstado().getSigla());
+			System.out.println("Nome do Estado: " + cidade.getEstado().getNome());
+			System.out.println();
+		}
 	}
 
 }
