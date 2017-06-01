@@ -49,7 +49,7 @@ public class EstadoBean implements Serializable {
 			// LIMPAR CAMPOS
 			estado = new Estado();
 			// RECARREGAR A LISTA
-			listarEstados = estadoDAO.listar();
+			listarEstados = estadoDAO.listar("nome");
 			Messages.addGlobalInfo("Estado Cadastrado com Sucesso.");
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro ao Cadastrar o Estado.");
@@ -62,7 +62,7 @@ public class EstadoBean implements Serializable {
 	public void listar() {
 		try {
 			EstadoDAO estadoDAO = new EstadoDAO();
-			listarEstados = estadoDAO.listar();
+			listarEstados = estadoDAO.listar("nome");
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro ao Listar o Estado.");
 			error.printStackTrace();
@@ -78,7 +78,7 @@ public class EstadoBean implements Serializable {
 			estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estadoDAO.excluir(estado);
-			listarEstados = estadoDAO.listar();
+			listarEstados = estadoDAO.listar("nome");
 			Messages.addGlobalInfo("Estado removido com sucesso");
 
 		} catch (RuntimeException error) {

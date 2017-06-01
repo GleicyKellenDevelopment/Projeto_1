@@ -53,7 +53,7 @@ public class CidadeBean implements Serializable{
 	public void listar() {
 		try {
 			CidadeDAO cidadeDAO = new CidadeDAO();
-			listarCidades = cidadeDAO.listar();
+			listarCidades = cidadeDAO.listar("nome");
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro ao Listar as Cidades.");
 			error.printStackTrace(); 
@@ -65,7 +65,7 @@ public class CidadeBean implements Serializable{
 			cidade = new Cidade();
 			
 			EstadoDAO estadoDAO = new EstadoDAO();
-			listarEstados = estadoDAO.listar();
+			listarEstados = estadoDAO.listar("nome");
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro ao Gerar uma Nova Cidade.");
 			error.printStackTrace();
@@ -79,8 +79,8 @@ public class CidadeBean implements Serializable{
 			
 			cidade = new Cidade();
 			EstadoDAO estadoDAO = new EstadoDAO();
-			listarEstados = estadoDAO.listar();
-			listarCidades = cidadeDAO.listar();
+			listarEstados = estadoDAO.listar("nome");
+			listarCidades = cidadeDAO.listar("nome");
 			
 			Messages.addGlobalInfo("Cidade Salva com Sucesso.");
 		} catch (RuntimeException error) {
@@ -93,7 +93,7 @@ public class CidadeBean implements Serializable{
 		try {
 			cidade = (Cidade) evento.getComponent().getAttributes().get("cidadeSelecionado");
 			EstadoDAO estadoDAO = new EstadoDAO();
-			listarEstados = estadoDAO.listar();
+			listarEstados = estadoDAO.listar("nome");
 
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro Selecionar uma Cidade.");
@@ -107,7 +107,7 @@ public class CidadeBean implements Serializable{
 			cidade = (Cidade) evento.getComponent().getAttributes().get("cidadeSelecionado");
 			CidadeDAO cidadeDAO = new CidadeDAO();
 			cidadeDAO.excluir(cidade);
-			listarCidades = cidadeDAO.listar();
+			listarCidades = cidadeDAO.listar("nome");
 			Messages.addGlobalInfo("Cidade removida com sucesso");
 
 		} catch (RuntimeException error) {

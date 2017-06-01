@@ -43,7 +43,7 @@ public class MarcaBean implements Serializable{
 	public void listar() {
 		try {
 			MarcaDAO marcaDAO = new MarcaDAO();
-			listarMarcas = marcaDAO.listar();
+			listarMarcas = marcaDAO.listar("nome_marca");
 
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro ao Listar as Marcas.");
@@ -59,7 +59,7 @@ public class MarcaBean implements Serializable{
 
 			marca = new Marca();
 
-			listarMarcas = marcaDAO.listar();
+			listarMarcas = marcaDAO.listar("nome_marca");
 			Messages.addGlobalInfo("Marca Cadastrada com Sucesso.");
 			
 		} catch (RuntimeException error) {
@@ -78,7 +78,7 @@ public class MarcaBean implements Serializable{
 			marca = (Marca) evento.getComponent().getAttributes().get("marcaSelecionado");
 			MarcaDAO marcaDAO = new MarcaDAO();
 			marcaDAO.excluir(marca);
-			listarMarcas = marcaDAO.listar();
+			listarMarcas = marcaDAO.listar("nome_marca");
 			Messages.addGlobalInfo("Marca removida com sucesso");
 
 		} catch (RuntimeException error) {
