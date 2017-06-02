@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
@@ -36,7 +37,20 @@ public class Cliente extends GenericDomain {
 	public Boolean getAtivo() {
 		return ativo;
 	}
-
+	
+	@Transient
+	public String getAtivoFormatado() {
+		String ativoFormatado = null;
+		
+		if (ativo){
+			ativoFormatado = "Ativo";
+		} else {
+			ativoFormatado = "Não ativo";
+		}
+		
+		return ativoFormatado;
+	}
+	
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}

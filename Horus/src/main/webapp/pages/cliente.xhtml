@@ -18,6 +18,7 @@
 			<p:dataTable id="tabelaCidades"
 				emptyMessage="Nenhum Registro Encontrado." paginator="true"
 				value="#{clienteBean.listarClientes}" var="cliente" rows="5">
+				
 				<f:facet name="header">
 					<p:commandButton value="Adicionar"
 						actionListener="#{clienteBean.novo}"
@@ -54,7 +55,7 @@
 				</p:column>
 
 				<p:column headerText="Status do Cliente">
-					<p:selectBooleanCheckbox value="#{cliente.ativo}" disabled="true" />
+					<h:outputText value="#{cliente.ativoFormatado}" />
 				</p:column>
 
 				<p:column headerText="Opções">
