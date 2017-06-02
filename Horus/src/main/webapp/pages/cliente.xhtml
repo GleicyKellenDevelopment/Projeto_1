@@ -7,43 +7,118 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Hórus Informática</title>
+	<h:outputScript library="js" name="configCalendario.js"/>
 </h:head>
 <h:body>
-	<h:form>
+
+	<p:growl id="mensagem" />
+
+	<h:form id="listagemClientes">
 		<p:panel header="Listagem de Clientes">
-			<p:dataTable emptyMessage="Nenhum Registro Encontrado."
-				paginator="true">
+			<p:dataTable id="tabelaCidades"
+				emptyMessage="Nenhum Registro Encontrado." paginator="true"
+				value="#{clienteBean.listarClientes}" var="cliente" rows="5">
 				<f:facet name="header">
 					<p:commandButton value="Adicionar"
-						oncomplete="PF('adicionarCliente').show();" />
+						actionListener="#{clienteBean.novo}"
+						update=":mensagem :clienteForm:camposCliente"
+						oncomplete="PF('adicionarCliente').show();">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
 				</f:facet>
-				<p:column headerText="Nome"></p:column>
-				<p:column headerText="CPF"></p:column>
-				<p:column headerText="Data de Cadastro"></p:column>
-				<p:column headerText="Status do Cliente"></p:column>
-				<p:column headerText="Opções"></p:column>
+
+				<p:column headerText="Nome" sortBy="#{cliente.pessoa.nome}"
+					filterBy="#{cliente.pessoa.nome}">
+					<h:outputText value="#{cliente.pessoa.nome}" />
+				</p:column>
+
+				<p:column headerText="CPF" sortBy="#{cliente.pessoa.cpf}"
+					filterBy="#{cliente.pessoa.cpf}">
+					<h:outputText value="#{cliente.pessoa.cpf}" />
+				</p:column>
+
+
+				<p:column headerText="Email">
+					<h:outputText value="#{cliente.pessoa.email}" />
+				</p:column>
+
+				<p:column headerText="Endereço">
+					<h:outputText value="#{cliente.pessoa.endereco}" />
+				</p:column>
+
+				<p:column headerText="Data de Cadastro">
+					<h:outputText value="#{cliente.dataCadastro}">
+						<f:convertDateTime locale="pt_BR" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Status do Cliente">
+					<p:selectBooleanCheckbox value="#{cliente.ativo}" disabled="true" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{clienteBean.editar}"
+						update=":clienteForm:camposCliente"
+						oncomplete="PF('adicionarCliente').show();">
+						<f:attribute name="clienteSelecionado" value="#{cliente}" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+
+
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{clienteBean.excluir}"
+						update=":mensagem :listagemClientes:tabelaCidades">
+						<p:confirm header="Excluir"
+							message="Deseja realmente excluir o Cliente?" icon="ui-icon-alert" />
+						<f:attribute name="clienteSelecionado" value="#{cliente}" />
+					</p:commandButton>
+				</p:column>
 			</p:dataTable>
+			
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+			
 		</p:panel>
 	</h:form>
 
 	<p:dialog header="Adicionar Cliente" widgetVar="adicionarCliente"
 		draggable="false" resizable="false" modal="true">
-		<h:form>
-			<h:panelGrid columns="2">
-				
-				<p:outputLabel value="Cliente:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione um Cliente:" />
+		<h:form id="clienteForm">
+			<h:panelGrid id="camposCliente" columns="2">
+
+				<p:outputLabel for="cliente" value="Cliente:" />
+				<p:selectOneMenu id="cliente" filter="true" required="true"
+					converter="omnifaces.SelectItemsConverter"
+					requiredMessage="O campo 'Cliente' é Obrigatório."
+					value="#{clienteBean.cliente.pessoa}">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione um Cliente:" />
+					<f:selectItems value="#{clienteBean.listarPessoas}" var="pessoa"
+						itemLabel="#{pessoa.nome} - #{pessoa.cpf}" itemValue="#{pessoa}" />
 				</p:selectOneMenu>
-			
-				<p:outputLabel value="Data de Cadastro:" />
-				<p:calendar />
-				
-				<p:outputLabel value="Status do Cliente:" />				
-				<p:selectBooleanCheckbox />
+
+				<p:outputLabel for="data" value="Data de Cadastro:" />
+				<p:calendar id="data" size="20"
+					value="#{clienteBean.cliente.dataCadastro}" required="true"
+					requiredMessage="O campo 'Data de Cadastro' é Obrigatório." locale="pt_BR"/>
+
+				<p:outputLabel for="ativo" value="Status do Cliente:" />
+				<p:selectBooleanCheckbox id="ativo"
+					value="#{clienteBean.cliente.ativo}" required="true"
+					requiredMessage="O campo 'Status do Cliente' é Obrigatório." />
+
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
+				<p:commandButton actionListener="#{clienteBean.salvar}"
+					value="Salvar"
+					update=":mensagem :clienteForm:camposCliente :listagemClientes:tabelaCidades" />
 				<p:commandButton value="Cancelar"
 					oncomplete="PF('adicionarCliente').hide();" />
 			</h:panelGrid>

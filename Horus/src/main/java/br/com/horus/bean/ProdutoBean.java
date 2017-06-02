@@ -59,7 +59,7 @@ public class ProdutoBean implements Serializable{
 			produto = new Produto();
 			
 			MarcaDAO marcaDAO = new MarcaDAO();
-			listarMarcas = marcaDAO.listar("nome_marca");
+			listarMarcas = marcaDAO.listar();
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro ao Gerar um Produto.");
 			error.printStackTrace();
@@ -73,7 +73,7 @@ public class ProdutoBean implements Serializable{
 			
 			produto = new Produto();
 			MarcaDAO marcaDAO = new MarcaDAO();
-			listarMarcas = marcaDAO.listar("nome_marca");
+			listarMarcas = marcaDAO.listar();
 			listarProdutos = produtoDAO.listar("nome_produto");
 			
 			Messages.addGlobalInfo("Produto Salvo com Sucesso.");
@@ -87,7 +87,7 @@ public class ProdutoBean implements Serializable{
 		try {
 			produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
 			MarcaDAO marcaDAO = new MarcaDAO();
-			listarMarcas = marcaDAO.listar("nome_marca");
+			listarMarcas = marcaDAO.listar();
 
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro Selecionar um Produto.");
