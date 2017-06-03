@@ -1,6 +1,7 @@
 package br.com.horus.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,28 +45,40 @@ public class VendaBean implements Serializable {
 		try {
 			ProdutoDAO produtoDAO = new ProdutoDAO();
 			listarProdutos = produtoDAO.listar("nome_produto");
-			
+
 			listaPedidos = new ArrayList<>();
-			
+
 		} catch (RuntimeException error) {
 			Messages.addGlobalError("Erro ao Listar as Vendas.");
 			error.printStackTrace();
 		}
 	}
-	
+
 	public void adicionarProduto(ActionEvent evento) {
-		
-			Produto produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
-			
-			//Converter Produto para Pedido
+
+		Produto produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
+
+		int achou = -1;
+		for (int posicao = 0; posicao < listaPedidos.size(); posicao ++) {
+			if (listaPedidos.get(posicao).getProduto().equals(produto)) {
+				achou = posicao;
+			}
+		}
+
+		if (achou < 0) {
 			Pedido pedido = new Pedido();
-			// Preencher
 			pedido.setPreco_parcial(produto.getPreco());
 			pedido.setProduto(produto);
 			pedido.setQuantidade(new Short("1"));
-			
+
 			listaPedidos.add(pedido);
-
+		} else {
+			Pedido pedido = listaPedidos.get(achou); // pega a posicao do produto
+			pedido.setQuantidade(new Short(pedido.getQuantidade() + 1 + ""));
+			// uso das aspas = quantidade vira para string e depois e adicionada para short
+			pedido.setPreco_parcial(produto.getPreco().multiply(new BigDecimal(pedido.getQuantidade())));
+		}
 	}
-
+	
+	
 }
