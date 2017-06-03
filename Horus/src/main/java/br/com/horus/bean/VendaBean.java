@@ -80,5 +80,20 @@ public class VendaBean implements Serializable {
 		}
 	}
 	
+	public void removerPedido(ActionEvent evento) {
+		Pedido pedido = (Pedido) evento.getComponent().getAttributes().get("pedidoSelecionado");
+		
+		int achou = -1;
+		
+		for (int posicao = 0; posicao < listaPedidos.size(); posicao ++) {
+			if (listaPedidos.get(posicao).getProduto().equals(pedido.getProduto())) {
+				achou = posicao;
+			}
+		}
+		
+		if (achou > -1) {
+			listaPedidos.remove(achou);
+		}
+	}
 	
 }

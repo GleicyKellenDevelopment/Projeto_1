@@ -82,7 +82,10 @@
 				</p:column>
 
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-minus" />
+					<p:commandButton icon="ui-icon-trash" actionListener="#{vendaBean.removerPedido}"
+						update=":vendas:tabelaPedidos">
+						<f:attribute name="pedidoSelecionado" value="#{pedido}" />
+					</p:commandButton>
 				</p:column>
 
 			</p:dataTable>
