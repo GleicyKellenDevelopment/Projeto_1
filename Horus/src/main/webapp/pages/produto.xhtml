@@ -89,13 +89,13 @@
 		<h:form id="produtoForm">
 			<h:panelGrid columns="2" id="camposProduto">
 
-				<p:outputLabel value="Nome:" />
-				<p:inputText size="20" maxlength="50"
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" size="20" maxlength="50"
 					value="#{produtoBean.produto.nome_produto}" required="true"
 					requiredMessage="Campo 'Nome' é Obrigatório" />
 
-				<p:outputLabel value="Marca:" />
-				<p:selectOneMenu filter="true"
+				<p:outputLabel for="marca" value="Marca:" />
+				<p:selectOneMenu id="marca" filter="true"
 					value="#{produtoBean.produto.marca}"
 					converter="omnifaces.SelectItemsConverter" required="true"
 					requiredMessage="Campo 'Marca' é Obrigatório.">
@@ -105,8 +105,8 @@
 						itemLabel="#{marca.nome_marca}" itemValue="#{marca}" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Quantidade:" />
-				<p:inputText size="20" maxlength="5"
+				<p:outputLabel for="qtd" value="Quantidade:" />
+				<p:inputText id="qtd" size="20" maxlength="5"
 					value="#{produtoBean.produto.qtd_estoque}" required="true"
 					requiredMessage="Campo 'Quantidade' é Obrigatório" 
 					converterMessage="O valor no campo 'Quantidade' é inválido"
@@ -114,8 +114,8 @@
 					<f:validateLongRange minimum="0" maximum="150"/>
 				</p:inputText>
 
-				<p:outputLabel value="Preço:" />
-				<p:inputText size="20" maxlength="7"
+				<p:outputLabel for="preco" value="Preço:" />
+				<p:inputText id="preco" size="20" maxlength="7"
 					value="#{produtoBean.produto.preco}" required="true"
 					requiredMessage="Campo 'Preço' é Obrigatório"
 					converterMessage="O valor no campo 'Preço' é inválido"
