@@ -9,44 +9,110 @@
 	<title>Hórus Informática</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:panel header="Listagem das Vendas">
-			<p:dataTable emptyMessage="Nenhum Registro Encontrado."
-				paginator="true">
-				<f:facet name="header">
-					<p:commandButton value="Adicionar"
-						oncomplete="PF('adicionarVenda').show();" />
-				</f:facet>
-				<p:column headerText="Cliente"></p:column>
-				<p:column headerText="Funcionário"></p:column>
-				<p:column headerText="Data da Venda"></p:column>
-				<p:column headerText="Valor Total"></p:column>
-				<p:column headerText="Opções"></p:column>
+
+	<p:growl id="mensagem" />
+
+	<h:form id="vendas">
+		<p:panel header="Produtos">
+			<p:dataTable id="tabelaProdutos"
+				emptyMessage="Nenhum Registro Encontrado." paginator="true"
+				var="produto" rows="3" value="#{vendaBean.listarProdutos}">
+
+				<p:column headerText="Nome" sortBy="#{produto.nome_produto}"
+					filterBy="#{produto.nome_produto}">
+					<h:outputText value="#{produto.nome_produto}" />
+				</p:column>
+
+				<p:column headerText="Marca" sortBy="#{produto.marca.nome_marca}"
+					filterBy="#{produto.marca.nome_marca}">
+					<h:outputText value="#{produto.marca.nome_marca}" />
+				</p:column>
+
+				<p:column headerText="Quantidade" sortBy="#{produto.qtd_estoque}"
+					filterBy="#{produto.qtd_estoque}">
+					<h:outputText value="#{produto.qtd_estoque}" />
+				</p:column>
+
+				<p:column headerText="Preço" sortBy="#{produto.preco}"
+					filterBy="#{produto.preco}">
+					<h:outputText value="#{produto.preco}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-plus" actionListener="#{vendaBean.adicionarProduto}"
+						 update=":vendas:tabelaPedidos">
+						<f:attribute name="produtoSelecionado" value="#{produto}" />
+					</p:commandButton>
+				</p:column>
+
 			</p:dataTable>
 		</p:panel>
+
+		<p:panel header="Pedido">
+
+			<p:dataTable id="tabelaPedidos"
+				emptyMessage="Nenhum Registro Encontrado." paginator="true"
+				var="pedido" rows="5" value="#{vendaBean.listaPedidos}">
+
+				<p:column headerText="Produto"
+					filterBy="#{pedido.produto.nome_produto}">
+					<h:outputText value="#{pedido.produto.nome_produto}" />
+				</p:column>
+
+				<p:column headerText="Marca">
+					<h:outputText value="#{pedido.produto.marca.nome_marca}" />
+				</p:column>
+
+				<p:column headerText="Preço Un.">
+					<h:outputText value="#{pedido.produto.preco}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{pedido.produto.qtd_estoque}" />
+				</p:column>
+
+				<p:column headerText="Valor Parcial.">
+					<h:outputText value="#{pedido.preco_parcial}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-minus" />
+				</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+
+		<p:panel header="Total"></p:panel>
 	</h:form>
 
 	<p:dialog header="Adicionar Venda" widgetVar="adicionarVenda"
 		draggable="false" resizable="false" modal="true">
 		<h:form>
 			<h:panelGrid columns="2">
-				
+
 				<p:outputLabel value="Cliente:" />
 				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione um Cliente:"/>
+					<f:selectItem itemValue="" itemLabel="Selecione um Cliente:" />
 				</p:selectOneMenu>
-				
+
 				<p:outputLabel value="Funcionário:" />
 				<p:selectOneMenu filter="true">
 					<f:selectItem itemValue="" itemLabel="Selecione um Funcionário:" />
 				</p:selectOneMenu>
-				
+
 				<p:outputLabel value="Data da Venda:" />
 				<p:calendar />
-				
+
 				<p:outputLabel value="Valor Total:" />
 				<p:inputText size="20" maxlength="7" />
-				
+
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" />
