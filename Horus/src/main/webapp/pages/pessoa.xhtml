@@ -103,13 +103,13 @@
 		<h:form id="pessoaForm">
 			<h:panelGrid columns="2" id="camposPessoa">
 
-				<p:outputLabel value="Nome:" />
-				<p:inputText size="20" maxlength="50" required="true"
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" size="20" maxlength="50" required="true"
 					requiredMessage="Campo 'Nome' é Obrigatório."
 					value="#{pessoaBean.pessoa.nome}" />
 
-				<p:outputLabel value="CPF:" />
-				<p:inputMask mask="999.999.999.-99" size="20" required="true"
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputMask id="cpf" mask="999.999.999.-99" size="20" required="true"
 					requiredMessage="Campo 'CPF' é Obrigatório."
 					value="#{pessoaBean.pessoa.cpf}" />
 
@@ -125,7 +125,7 @@
 						update=":pessoaForm:cidade" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Cidade:" />
+				<p:outputLabel for="cidade" value="Cidade:" />
 				<p:selectOneMenu id="cidade" filter="true"
 					converter="omnifaces.SelectItemsConverter" required="true"
 					requiredMessage="Campo 'Cidade' é Obrigatório."
@@ -140,13 +140,13 @@
 				<p:inputText size="20" maxlength="40"
 					value="#{pessoaBean.pessoa.bairro}" />
 
-				<p:outputLabel value="CEP:" />
-				<p:inputMask mask="99999-999" size="20"
+				<p:outputLabel for="cep" value="CEP:" />
+				<p:inputMask id="cep" mask="99999-999" size="20"
 					value="#{pessoaBean.pessoa.cep}" required="true"
 					requiredMessage="Campo 'CEP' é Obrigatório." />
 
-				<p:outputLabel value="Endereço:" />
-				<p:inputText size="20" maxlength="40"
+				<p:outputLabel for="endereco" value="Endereço:" />
+				<p:inputText id="endereco" size="20" maxlength="40"
 					value="#{pessoaBean.pessoa.endereco}" required="true"
 					requiredMessage="Campo 'Endereço' é Obrigatório." />
 
@@ -155,19 +155,21 @@
 					value="#{pessoaBean.pessoa.complemento}" />
 
 				<p:outputLabel value="Número:" />
-				<p:inputText size="20" maxlength="5"
-					value="#{pessoaBean.pessoa.numero}" />
+				<p:inputText size="20" maxlength="5" converterMessage="O valor no campo 'Número' é inválido"
+					value="#{pessoaBean.pessoa.numero}" validatorMessage="O valor inserido no campo 'Número' é inválido. ( 0 a 10.000 )">
+					<f:validateLongRange minimum="0" maximum="10000"/>
+				</p:inputText>
 
 				<p:outputLabel value="Telefone:" />
 				<p:inputMask mask="(99)9999-9999" size="20"
-					value="#{pessoaBean.pessoa.telefone}" />
+					value="#{pessoaBean.pessoa.telefone}"  />
 
 				<p:outputLabel value="Celular:" />
 				<p:inputMask mask="(99)99999-9999" size="20"
 					value="#{pessoaBean.pessoa.celular}" />
 
-				<p:outputLabel value="Email:" />
-				<p:inputText size="20" maxlength="50" required="true"
+				<p:outputLabel for="email" value="Email:" />
+				<p:inputText id="email" size="20" maxlength="50" required="true"
 					requiredMessage="Campo 'Email' é Obrigatório."
 					value="#{pessoaBean.pessoa.email}" />
 

@@ -73,10 +73,12 @@
 		<h:form id="marcaForm">
 
 			<h:panelGrid columns="2" id="camposMarca">
-				<p:outputLabel value="Nome:" />
-				<p:inputText size="20" maxlength="50" required="true"
+				
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" size="20" maxlength="50" required="true"
 					requiredMessage="Campo 'Nome' é Obrigatório."
 					value="#{marcaBean.marca.nome_marca}" />
+					
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">

@@ -130,8 +130,10 @@ public class PessoaBean implements Serializable{
 		try {
 			pessoa = (Pessoa) evento.getComponent().getAttributes().get("pessoaSelecionado");
 			
+			estadoSelecionado = pessoa.getCidade().getEstado();
 			EstadoDAO estadoDAO = new EstadoDAO();
 			listarEstados = estadoDAO.listar("nome");
+			
 			CidadeDAO cidadeDAO = new CidadeDAO();
 			listarCidades = cidadeDAO.listar("nome");
 
