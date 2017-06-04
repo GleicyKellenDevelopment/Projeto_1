@@ -97,13 +97,56 @@
 		<p:panel header="Total">
 			<h:panelGrid id="finalizar" columns="3">
 				<p:outputLabel value="Total: R$" />
-				<h:outputText value="#{vendaBean.venda.precoTotal}" >
+				<h:outputText value="#{vendaBean.venda.precoTotal}">
 					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 				</h:outputText>
-				<p:commandButton value="Finalizar" />
+				<p:commandButton value="Finalizar" actionListener="#{vendaBean.finalizar}"
+					oncomplete="PF('finalizarVenda').show();"
+					update=":mensagem :finalizarVenda:camposFinalizar" />
 			</h:panelGrid>
 		</p:panel>
 	</h:form>
+
+	<p:dialog header="Finalização da Venda" widgetVar="finalizarVenda"
+		draggable="false" resizable="false" modal="true">
+
+		<h:form id="finalizarVenda">
+
+			<h:panelGrid id="camposFinalizar" columns="2">
+
+				<p:outputLabel value="Funcionário:" />
+				<p:selectOneMenu value="#{vendaBean.venda.funcionario}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Campo 'Funcionário' é Obrigatório." filter="true" filterMatchMode="contains">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Escolha um Funcionário:" />
+					<f:selectItems value="#{vendaBean.listarFuncionarios}"
+						var="funcionario" itemLabel="#{funcionario.pessoa.cpf} - #{funcionario.pessoa.nome}"
+						itemValue="#{funcionario}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Cliente:" />
+				<p:selectOneMenu value="#{vendaBean.venda.cliente}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Campo 'Cliente' é Obrigatório." filter="true" filterMatchMode="contains">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Escolha um Cliente:" />
+					<f:selectItems value="#{vendaBean.listarClientes}"
+						var="cliente" itemLabel="#{cliente.pessoa.cpf} - #{cliente.pessoa.nome}"
+						itemValue="#{cliente}" />
+				</p:selectOneMenu>
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Finalizar" />
+				<p:commandButton value="Fechar"
+					oncomplete="PF('finalizarVenda').hide();" />
+			</h:panelGrid>
+
+		</h:form>
+
+	</p:dialog>
 
 </h:body>
 </html>

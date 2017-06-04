@@ -98,7 +98,7 @@
 				<p:selectOneMenu id="marca" filter="true"
 					value="#{produtoBean.produto.marca}"
 					converter="omnifaces.SelectItemsConverter" required="true"
-					requiredMessage="Campo 'Marca' é Obrigatório.">
+					requiredMessage="Campo 'Marca' é Obrigatório." filterMatchMode="contains">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="Selecione uma Marca:" />
 					<f:selectItems value="#{produtoBean.listarMarcas}" var="marca"

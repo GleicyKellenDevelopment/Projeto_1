@@ -16,7 +16,7 @@ public class FuncionarioDAOTest {
 	@Ignore
 	public void salvar() throws ParseException {
 		PessoaDAO pessoaDAO = new PessoaDAO();
-		Pessoa pessoa = pessoaDAO.buscar(7L);
+		Pessoa pessoa = pessoaDAO.buscar(1L);
 		
 		Funcionario funcionario = new Funcionario();
 		funcionario.setData_admisssao(new Date());
