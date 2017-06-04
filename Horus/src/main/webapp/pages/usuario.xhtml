@@ -85,9 +85,8 @@
 					<f:selectItem itemValue="F" itemLabel="Funcionário" />
 				</p:selectOneRadio>
 
-				<p:outputLabel for="ativo" value="Ativo:" />
-				<p:selectBooleanCheckbox id="ativo" required="true"
-					requiredMessage="O campo 'Ativo' é obrigatório" 
+				<p:outputLabel value="Ativo:" />
+				<p:selectBooleanCheckbox 
 					value="#{usuarioBean.usuario.ativo}"/>
 			</h:panelGrid>
 			<h:panelGrid columns="2">

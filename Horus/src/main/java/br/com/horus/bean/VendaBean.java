@@ -15,15 +15,25 @@ import org.omnifaces.util.Messages;
 import br.com.horus.dao.ProdutoDAO;
 import br.com.horus.model.Pedido;
 import br.com.horus.model.Produto;
+import br.com.horus.model.Venda;
 
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
 public class VendaBean implements Serializable {
 
+	private Venda venda;
 	private List<Produto> listarProdutos;
 	private List<Pedido> listaPedidos;
 
+	public Venda getVenda() {
+		return venda;
+	}
+	
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+	
 	public List<Produto> getListarProdutos() {
 		return listarProdutos;
 	}
@@ -43,6 +53,10 @@ public class VendaBean implements Serializable {
 	@PostConstruct
 	public void listarProduto() {
 		try {
+			
+			venda = new Venda();
+			venda.setPrecoTotal(new BigDecimal("0.00"));
+			
 			ProdutoDAO produtoDAO = new ProdutoDAO();
 			listarProdutos = produtoDAO.listar("nome_produto");
 
@@ -78,6 +92,8 @@ public class VendaBean implements Serializable {
 			// uso das aspas = quantidade vira para string e depois e adicionada para short
 			pedido.setPreco_parcial(produto.getPreco().multiply(new BigDecimal(pedido.getQuantidade())));
 		}
+		
+		calcularTotal();
 	}
 	
 	public void removerPedido(ActionEvent evento) {
@@ -93,6 +109,19 @@ public class VendaBean implements Serializable {
 		
 		if (achou > -1) {
 			listaPedidos.remove(achou);
+		}
+		
+		calcularTotal();
+	}
+	
+	public void calcularTotal() {
+		venda.setPrecoTotal(new BigDecimal("0.00"));
+		
+		for (int posicao = 0; posicao < listaPedidos.size(); posicao++) {
+			
+			Pedido pedido = listaPedidos.get(posicao);
+			venda.setPrecoTotal( venda.getPrecoTotal().add(pedido.getPreco_parcial()) );
+			
 		}
 	}
 	

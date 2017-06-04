@@ -41,8 +41,9 @@
 				</p:column>
 
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-plus" actionListener="#{vendaBean.adicionarProduto}"
-						 update=":vendas:tabelaPedidos">
+					<p:commandButton icon="ui-icon-plus"
+						actionListener="#{vendaBean.adicionarProduto}"
+						update=":vendas:tabelaPedidos :vendas:finalizar">
 						<f:attribute name="produtoSelecionado" value="#{produto}" />
 					</p:commandButton>
 				</p:column>
@@ -82,8 +83,9 @@
 				</p:column>
 
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-trash" actionListener="#{vendaBean.removerPedido}"
-						update=":vendas:tabelaPedidos">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{vendaBean.removerPedido}"
+						update=":vendas:tabelaPedidos :vendas:finalizar">
 						<f:attribute name="pedidoSelecionado" value="#{pedido}" />
 					</p:commandButton>
 				</p:column>
@@ -92,38 +94,16 @@
 
 		</p:panel>
 
-		<p:panel header="Total"></p:panel>
+		<p:panel header="Total">
+			<h:panelGrid id="finalizar" columns="3">
+				<p:outputLabel value="Total: R$" />
+				<h:outputText value="#{vendaBean.venda.precoTotal}" >
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+				<p:commandButton value="Finalizar" />
+			</h:panelGrid>
+		</p:panel>
 	</h:form>
-
-	<p:dialog header="Adicionar Venda" widgetVar="adicionarVenda"
-		draggable="false" resizable="false" modal="true">
-		<h:form>
-			<h:panelGrid columns="2">
-
-				<p:outputLabel value="Cliente:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione um Cliente:" />
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Funcionário:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione um Funcionário:" />
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Data da Venda:" />
-				<p:calendar />
-
-				<p:outputLabel value="Valor Total:" />
-				<p:inputText size="20" maxlength="7" />
-
-			</h:panelGrid>
-			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
-				<p:commandButton value="Cancelar"
-					oncomplete="PF('adicionarVenda').hide();" />
-			</h:panelGrid>
-		</h:form>
-	</p:dialog>
 
 </h:body>
 </html>
