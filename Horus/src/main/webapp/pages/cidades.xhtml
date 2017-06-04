@@ -82,7 +82,7 @@
 				<p:selectOneMenu id="estado" filter="true"
 					value="#{cidadeBean.cidade.estado}"
 					converter="omnifaces.SelectItemsConverter" required="true"
-					requiredMessage="Campo 'Estado' é Obrigatório.">
+					requiredMessage="Campo 'Estado' é Obrigatório." filterMatchMode="contains">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="Selecione um Estado" />
 					<f:selectItems value="#{cidadeBean.listarEstados}" var="estado"

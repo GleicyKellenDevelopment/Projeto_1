@@ -116,7 +116,7 @@
 				<p:outputLabel value="Estado" />
 				<p:selectOneMenu filter="true"
 					converter="omnifaces.SelectItemsConverter"
-					value="#{pessoaBean.estadoSelecionado}">
+					value="#{pessoaBean.estadoSelecionado}" filterMatchMode="contains">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="Selecione um Estado:" />
 					<f:selectItems value="#{pessoaBean.listarEstados}" var="estado"
@@ -129,7 +129,7 @@
 				<p:selectOneMenu id="cidade" filter="true"
 					converter="omnifaces.SelectItemsConverter" required="true"
 					requiredMessage="Campo 'Cidade' é Obrigatório."
-					value="#{pessoaBean.pessoa.cidade}">
+					value="#{pessoaBean.pessoa.cidade}" filterMatchMode="contains">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="Selecione uma Cidade:" />
 					<f:selectItems value="#{pessoaBean.listarCidades}" var="cidade"

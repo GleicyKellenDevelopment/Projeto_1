@@ -12,7 +12,11 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
+import br.com.horus.dao.ClienteDAO;
+import br.com.horus.dao.FuncionarioDAO;
 import br.com.horus.dao.ProdutoDAO;
+import br.com.horus.model.Cliente;
+import br.com.horus.model.Funcionario;
 import br.com.horus.model.Pedido;
 import br.com.horus.model.Produto;
 import br.com.horus.model.Venda;
@@ -25,7 +29,9 @@ public class VendaBean implements Serializable {
 	private Venda venda;
 	private List<Produto> listarProdutos;
 	private List<Pedido> listaPedidos;
-
+	private List<Cliente> listarClientes;
+	private List<Funcionario> listarFuncionarios;
+	
 	public Venda getVenda() {
 		return venda;
 	}
@@ -49,7 +55,24 @@ public class VendaBean implements Serializable {
 	public void setListaPedidos(List<Pedido> listaPedidos) {
 		this.listaPedidos = listaPedidos;
 	}
+	
+	public List<Cliente> getListarClientes() {
+		return listarClientes;
+	}
 
+	public void setListarClientes(List<Cliente> listarClientes) {
+		this.listarClientes = listarClientes;
+	}
+
+	public List<Funcionario> getListarFuncionarios() {
+		return listarFuncionarios;
+	}
+
+	public void setListarFuncionarios(List<Funcionario> listarFuncionarios) {
+		this.listarFuncionarios = listarFuncionarios;
+	}
+
+	
 	@PostConstruct
 	public void listarProduto() {
 		try {
@@ -122,6 +145,20 @@ public class VendaBean implements Serializable {
 			Pedido pedido = listaPedidos.get(posicao);
 			venda.setPrecoTotal( venda.getPrecoTotal().add(pedido.getPreco_parcial()) );
 			
+		}
+	}
+	
+	public void finalizar() {
+		try {
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			listarFuncionarios = funcionarioDAO.listarOrdenado();
+			
+			ClienteDAO clienteDAO = new ClienteDAO();
+			listarClientes = clienteDAO.listarOrdenado();
+			
+		} catch (RuntimeException error) {
+			Messages.addGlobalError("Erro ao Finalizar a Venda.");
+			error.printStackTrace();
 		}
 	}
 	
