@@ -113,7 +113,12 @@
 		<h:form id="finalizarVenda">
 
 			<h:panelGrid id="camposFinalizar" columns="2">
-
+				
+				<p:outputLabel value="Horário:" style="font-weight: bold;"/>
+				<h:outputText value="#{vendaBean.venda.horario}" style="font-weight: bold;">
+					<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss " locale="pt_BR" timeZone="America/Sao_Paulo"/>
+				</h:outputText>
+				
 				<p:outputLabel value="Funcionário:" />
 				<p:selectOneMenu value="#{vendaBean.venda.funcionario}"
 					converter="omnifaces.SelectItemsConverter" required="true"
@@ -135,6 +140,11 @@
 						var="cliente" itemLabel="#{cliente.pessoa.cpf} - #{cliente.pessoa.nome}"
 						itemValue="#{cliente}" />
 				</p:selectOneMenu>
+				
+				<p:outputLabel value="Total: R$" style="font-weight: bold;"/>
+				<h:outputText value="#{vendaBean.venda.precoTotal}" style="font-weight: bold;">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
 				
 			</h:panelGrid>
 
