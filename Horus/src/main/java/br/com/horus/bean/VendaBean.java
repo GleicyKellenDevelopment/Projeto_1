@@ -16,6 +16,7 @@ import org.omnifaces.util.Messages;
 import br.com.horus.dao.ClienteDAO;
 import br.com.horus.dao.FuncionarioDAO;
 import br.com.horus.dao.ProdutoDAO;
+import br.com.horus.dao.VendaDAO;
 import br.com.horus.model.Cliente;
 import br.com.horus.model.Funcionario;
 import br.com.horus.model.Pedido;
@@ -153,6 +154,9 @@ public class VendaBean implements Serializable {
 		try {
 			
 			venda.setHorario(new Date());
+			venda.setCliente(null);
+			venda.setFuncionario(null);
+			
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			listarFuncionarios = funcionarioDAO.listarOrdenado();
 			
@@ -165,4 +169,23 @@ public class VendaBean implements Serializable {
 		}
 	}
 	
+	public void salvar() {
+		try {
+			
+			if (venda.getPrecoTotal().signum() == 0) { // Pega a parte inteira do big decimal
+				Messages.addGlobalError("Informe pelo menos um item para a venda.");
+				return;
+			}
+			
+			VendaDAO vendaDAO = new VendaDAO();
+			vendaDAO.salvar(venda, listaPedidos);
+			listarProduto();
+			
+			Messages.addGlobalInfo("Venda Salva com Sucesso.");
+			
+		} catch (RuntimeException error) {
+			Messages.addGlobalError("Erro ao Salvar a Venda.");
+			error.printStackTrace();
+		}
+	}
 }
