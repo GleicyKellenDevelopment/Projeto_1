@@ -49,7 +49,7 @@ public class UsuarioBean implements Serializable{
 			listarUsuarios = usuarioDAO.listar("tipoUsuario");
 			
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar os Usuários.");
+			Messages.addGlobalError("Erro ao Listar os usuários.");
 			error.printStackTrace();
 		}
 	}
@@ -61,7 +61,7 @@ public class UsuarioBean implements Serializable{
 			PessoaDAO pessoaDAO =  new PessoaDAO();
 			listarPessoas = pessoaDAO.listar("nome");
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Gerar uma Novo Usuário.");
+			Messages.addGlobalError("Erro ao Gerar um usuário.");
 			error.printStackTrace();
 		}
 	}

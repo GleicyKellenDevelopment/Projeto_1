@@ -46,7 +46,7 @@ public class MarcaBean implements Serializable{
 			listarMarcas = marcaDAO.listar("nome_marca");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar as Marcas.");
+			Messages.addGlobalError("Erro ao Listar as marcas.");
 			error.printStackTrace();
 		}
 	}
@@ -60,10 +60,10 @@ public class MarcaBean implements Serializable{
 			marca = new Marca();
 
 			listarMarcas = marcaDAO.listar("nome_marca");
-			Messages.addGlobalInfo("Marca Cadastrada com Sucesso.");
+			Messages.addGlobalInfo("Marca Salva com Sucesso.");
 			
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Cadastrar a Marca.");
+			Messages.addGlobalError("Erro ao Salvar a marca.");
 			error.printStackTrace();
 		}
 
@@ -79,10 +79,10 @@ public class MarcaBean implements Serializable{
 			MarcaDAO marcaDAO = new MarcaDAO();
 			marcaDAO.excluir(marca);
 			listarMarcas = marcaDAO.listar("nome_marca");
-			Messages.addGlobalInfo("Marca removida com sucesso");
+			Messages.addGlobalInfo("Marca Removida com Sucesso");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Remover a Marca.");
+			Messages.addGlobalError("Erro ao Remover a marca.");
 			error.printStackTrace();
 		}
 	}

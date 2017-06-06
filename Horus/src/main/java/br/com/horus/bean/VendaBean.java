@@ -88,7 +88,7 @@ public class VendaBean implements Serializable {
 			listaPedidos = new ArrayList<>();
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar as Vendas.");
+			Messages.addGlobalError("Erro ao Listar as vendas.");
 			error.printStackTrace();
 		}
 	}
@@ -164,7 +164,7 @@ public class VendaBean implements Serializable {
 			listarClientes = clienteDAO.listarOrdenado();
 			
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Finalizar a Venda.");
+			Messages.addGlobalError("Erro ao Finalizar a venda.");
 			error.printStackTrace();
 		}
 	}
@@ -184,7 +184,7 @@ public class VendaBean implements Serializable {
 			Messages.addGlobalInfo("Venda Salva com Sucesso.");
 			
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Salvar a Venda.");
+			Messages.addGlobalError("Erro ao Salvar a venda.");
 			error.printStackTrace();
 		}
 	}

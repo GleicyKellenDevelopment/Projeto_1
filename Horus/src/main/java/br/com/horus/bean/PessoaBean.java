@@ -76,7 +76,7 @@ public class PessoaBean implements Serializable{
 			PessoaDAO pessoaDAO = new PessoaDAO();
 			listarPessoas = pessoaDAO.listar("nome");
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar as Pessoas.");
+			Messages.addGlobalError("Erro ao Listar as pessoas.");
 			error.printStackTrace(); 
 		}
 	}
@@ -92,7 +92,7 @@ public class PessoaBean implements Serializable{
 			listarCidades = new ArrayList<Cidade>();
 			
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Gerar uma Pessoa.");
+			Messages.addGlobalError("Erro ao Gerar uma nova pessoa.");
 			error.printStackTrace();
 		}
 	}
@@ -105,7 +105,7 @@ public class PessoaBean implements Serializable{
 				
 			}
 		} catch (Exception error) {
-			Messages.addGlobalError("Erro ao tentar filtrar as Cidades.");
+			Messages.addGlobalError("Erro ao tentar filtrar as cidades.");
 			error.printStackTrace(); 
 		}
 		
@@ -121,7 +121,7 @@ public class PessoaBean implements Serializable{
 			novo();
 			Messages.addGlobalInfo("Pessoa Salva com Sucesso.");
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Salvar a Pessoa.");
+			Messages.addGlobalError("Erro ao Salvar a pessoa.");
 			error.printStackTrace();
 		}
 	}
@@ -138,7 +138,7 @@ public class PessoaBean implements Serializable{
 			listarCidades = cidadeDAO.listar("nome");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro Selecionar uma Pessoa.");
+			Messages.addGlobalError("Erro Selecionar uma pessoa.");
 			error.printStackTrace();
 		}
 	}
@@ -149,10 +149,10 @@ public class PessoaBean implements Serializable{
 			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoaDAO.excluir(pessoa);
 			listarPessoas = pessoaDAO.listar("nome");
-			Messages.addGlobalInfo("Pessoa removida com sucesso");
+			Messages.addGlobalInfo("Pessoa Removida com Sucesso");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro Remover a Pessoa.");
+			Messages.addGlobalError("Erro Remover a pessoa.");
 			error.printStackTrace();
 		}
 	}

@@ -55,7 +55,7 @@ public class ClienteBean implements Serializable{
 			listarClientes = clienteDAO.listar("dataCadastro");
 			
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar os Clientes.");
+			Messages.addGlobalError("Erro ao Listar os clientes.");
 			error.printStackTrace(); 
 		}
 	}
@@ -67,7 +67,7 @@ public class ClienteBean implements Serializable{
 			PessoaDAO pessoaDAO =  new PessoaDAO();
 			listarPessoas = pessoaDAO.listar("nome");
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Gerar uma Novo Cliente.");
+			Messages.addGlobalError("Erro ao Gerar um cliente.");
 			error.printStackTrace();
 		}
 	}
@@ -85,7 +85,7 @@ public class ClienteBean implements Serializable{
 			
 			Messages.addGlobalInfo("Cliente Salvo com Sucesso.");
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Salvar o Cliente.");
+			Messages.addGlobalError("Erro ao Salvar o cliente.");
 			error.printStackTrace();
 		}
 	}
@@ -97,7 +97,7 @@ public class ClienteBean implements Serializable{
 			listarPessoas = pessoaDAO.listar("nome");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro Selecionar um Cliente.");
+			Messages.addGlobalError("Erro Selecionar um cliente.");
 			error.printStackTrace();
 		}
 	}
@@ -108,10 +108,10 @@ public class ClienteBean implements Serializable{
 			ClienteDAO clienteDAO = new ClienteDAO();
 			clienteDAO.excluir(cliente);
 			listarClientes = clienteDAO.listar("dataCadastro");
-			Messages.addGlobalInfo("Cliente removido com sucesso");
+			Messages.addGlobalInfo("Cliente Removido com Sucesso.");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro Remover o Cliente.");
+			Messages.addGlobalError("Erro ao Remover o cliente.");
 			error.printStackTrace();
 		}
 	}
