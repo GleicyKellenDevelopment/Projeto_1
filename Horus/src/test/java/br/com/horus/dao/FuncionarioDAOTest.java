@@ -13,10 +13,10 @@ import br.com.horus.model.Pessoa;
 
 public class FuncionarioDAOTest {
 	@Test
-	@Ignore
+//	@Ignore
 	public void salvar() throws ParseException {
 		PessoaDAO pessoaDAO = new PessoaDAO();
-		Pessoa pessoa = pessoaDAO.buscar(1L);
+		Pessoa pessoa = pessoaDAO.buscar(8L);
 		
 		Funcionario funcionario = new Funcionario();
 		funcionario.setData_admisssao(new Date());

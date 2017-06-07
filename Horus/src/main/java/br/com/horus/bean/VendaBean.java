@@ -3,6 +3,7 @@ package br.com.horus.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,7 @@ import org.omnifaces.util.Messages;
 import br.com.horus.dao.ClienteDAO;
 import br.com.horus.dao.FuncionarioDAO;
 import br.com.horus.dao.ProdutoDAO;
+import br.com.horus.dao.VendaDAO;
 import br.com.horus.model.Cliente;
 import br.com.horus.model.Funcionario;
 import br.com.horus.model.Pedido;
@@ -86,7 +88,7 @@ public class VendaBean implements Serializable {
 			listaPedidos = new ArrayList<>();
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar as Vendas.");
+			Messages.addGlobalError("Erro ao Listar as vendas.");
 			error.printStackTrace();
 		}
 	}
@@ -150,6 +152,11 @@ public class VendaBean implements Serializable {
 	
 	public void finalizar() {
 		try {
+			
+			venda.setHorario(new Date());
+			venda.setCliente(null);
+			venda.setFuncionario(null);
+			
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			listarFuncionarios = funcionarioDAO.listarOrdenado();
 			
@@ -157,9 +164,28 @@ public class VendaBean implements Serializable {
 			listarClientes = clienteDAO.listarOrdenado();
 			
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Finalizar a Venda.");
+			Messages.addGlobalError("Erro ao Finalizar a venda.");
 			error.printStackTrace();
 		}
 	}
 	
+	public void salvar() {
+		try {
+			
+			if (venda.getPrecoTotal().signum() == 0) { // Pega a parte inteira do big decimal
+				Messages.addGlobalError("Informe pelo menos um item para a venda.");
+				return;
+			}
+			
+			VendaDAO vendaDAO = new VendaDAO();
+			vendaDAO.salvar(venda, listaPedidos);
+			listarProduto();
+			
+			Messages.addGlobalInfo("Venda Salva com Sucesso.");
+			
+		} catch (RuntimeException error) {
+			Messages.addGlobalError("Erro ao Salvar a venda.");
+			error.printStackTrace();
+		}
+	}
 }

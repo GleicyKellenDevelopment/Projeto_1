@@ -49,7 +49,7 @@ public class ProdutoBean implements Serializable{
 			ProdutoDAO produtoDAO = new ProdutoDAO();
 			listarProdutos = produtoDAO.listar("nome_produto");
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Listar os Produtos.");
+			Messages.addGlobalError("Erro ao Listar os produtos.");
 			error.printStackTrace(); 
 		}
 	}
@@ -61,7 +61,7 @@ public class ProdutoBean implements Serializable{
 			MarcaDAO marcaDAO = new MarcaDAO();
 			listarMarcas = marcaDAO.listar();
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Gerar um Produto.");
+			Messages.addGlobalError("Erro ao Gerar um produto.");
 			error.printStackTrace();
 		}
 	}
@@ -78,7 +78,7 @@ public class ProdutoBean implements Serializable{
 			
 			Messages.addGlobalInfo("Produto Salvo com Sucesso.");
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Salvar o Produto.");
+			Messages.addGlobalError("Erro ao Salvar o produto.");
 			error.printStackTrace();
 		}
 	}
@@ -90,7 +90,7 @@ public class ProdutoBean implements Serializable{
 			listarMarcas = marcaDAO.listar();
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro Selecionar um Produto.");
+			Messages.addGlobalError("Erro Selecionar um produto.");
 			error.printStackTrace();
 		}
 	}
@@ -101,10 +101,10 @@ public class ProdutoBean implements Serializable{
 			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtoDAO.excluir(produto);
 			listarProdutos = produtoDAO.listar("nome_produto");
-			Messages.addGlobalInfo("Produto removido com sucesso.");
+			Messages.addGlobalInfo("Produto Removido com Sucesso.");
 
 		} catch (RuntimeException error) {
-			Messages.addGlobalError("Erro ao Remover o Produto.");
+			Messages.addGlobalError("Erro ao Remover o produto.");
 			error.printStackTrace();
 		}
 	}
