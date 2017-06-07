@@ -125,8 +125,8 @@
 						timeZone="America/Sao_Paulo" />
 				</h:outputText>
 
-				<p:outputLabel value="Funcionário:" />
-				<p:selectOneMenu value="#{vendaBean.venda.funcionario}"
+				<p:outputLabel for="funcionario" value="Funcionário:" />
+				<p:selectOneMenu id="funcionario" value="#{vendaBean.venda.funcionario}"
 					converter="omnifaces.SelectItemsConverter" required="true"
 					requiredMessage="Campo 'Funcionário' é Obrigatório." filter="true"
 					filterMatchMode="contains">
@@ -138,8 +138,8 @@
 						itemValue="#{funcionario}" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Cliente:" />
-				<p:selectOneMenu value="#{vendaBean.venda.cliente}"
+				<p:outputLabel for="cliente" value="Cliente:" />
+				<p:selectOneMenu id="cliente" value="#{vendaBean.venda.cliente}"
 					converter="omnifaces.SelectItemsConverter" required="true"
 					requiredMessage="Campo 'Cliente' é Obrigatório." filter="true"
 					filterMatchMode="contains">
@@ -161,8 +161,7 @@
 			<h:panelGrid columns="2">
 				<p:commandButton value="Finalizar"
 					actionListener="#{vendaBean.salvar}"
-					update=":mensagem :vendas:tabelaProdutos :vendas:tabelaPedidos :vendas:finalizar"
-					oncomplete="PF('finalizarVenda').hide();" />
+					update=":mensagem :vendas:tabelaProdutos :vendas:tabelaPedidos :vendas:finalizar :finalizarVenda:camposFinalizar"/>
 				<p:commandButton value="Fechar"
 					oncomplete="PF('finalizarVenda').hide();" />
 			</h:panelGrid>
