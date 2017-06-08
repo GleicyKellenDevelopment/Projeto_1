@@ -106,7 +106,7 @@ public class VendaBean implements Serializable {
 
 		if (achou < 0) {
 			Pedido pedido = new Pedido();
-			pedido.setPreco_parcial(produto.getPreco());
+			pedido.setPreco_parcial(produto.getValor_unitario());
 			pedido.setProduto(produto);
 			pedido.setQuantidade(new Short("1"));
 
@@ -115,7 +115,7 @@ public class VendaBean implements Serializable {
 			Pedido pedido = listaPedidos.get(achou); // pega a posicao do produto
 			pedido.setQuantidade(new Short(pedido.getQuantidade() + 1 + ""));
 			// uso das aspas = quantidade vira para string e depois e adicionada para short
-			pedido.setPreco_parcial(produto.getPreco().multiply(new BigDecimal(pedido.getQuantidade())));
+			pedido.setPreco_parcial(produto.getValor_unitario().multiply(new BigDecimal(pedido.getQuantidade())));
 		}
 		
 		calcularTotal();

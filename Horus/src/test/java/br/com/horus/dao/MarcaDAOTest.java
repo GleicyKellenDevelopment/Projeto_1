@@ -12,7 +12,7 @@ import br.com.horus.model.Marca;
 public class MarcaDAOTest {
 	
 	@Test
-	@Ignore
+//	@Ignore
 	public void salvar() {
 		
 		Marca marca = new Marca();

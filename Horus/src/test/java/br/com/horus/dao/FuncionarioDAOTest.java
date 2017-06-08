@@ -19,7 +19,7 @@ public class FuncionarioDAOTest {
 		Pessoa pessoa = pessoaDAO.buscar(8L);
 		
 		Funcionario funcionario = new Funcionario();
-		funcionario.setData_admisssao(new Date());
+		funcionario.setData_admissao(new Date());
 		funcionario.setData_nascimento(new SimpleDateFormat("dd/MM/yyyy").parse("22/05/1989"));
 		funcionario.setPessoa(pessoa);
 		
@@ -40,7 +40,7 @@ public class FuncionarioDAOTest {
 			for (Funcionario funcionario : listarFuncionarios) {
 				System.out.println(funcionario.getPessoa().getNome() + " - " 
 					+ funcionario.getData_nascimento() + " - "
-					+ funcionario.getData_admisssao()
+					+ funcionario.getData_admissao()
 				);
 			}
 		}
@@ -57,7 +57,7 @@ public class FuncionarioDAOTest {
 		} else {
 			System.out.println(funcionario.getPessoa().getNome() + " - " 
 					+ funcionario.getData_nascimento() + " - "
-					+ funcionario.getData_admisssao()
+					+ funcionario.getData_admissao()
 				);
 		}
 	}
@@ -79,7 +79,7 @@ public class FuncionarioDAOTest {
 		}
 		
 		funcionario.setPessoa(pessoa);
-		funcionario.setData_admisssao(new SimpleDateFormat("dd/MM/yyyy").parse("20/05/2017"));
+		funcionario.setData_admissao(new SimpleDateFormat("dd/MM/yyyy").parse("20/05/2017"));
 		funcionarioDAO.editar(funcionario);
 	}
 	

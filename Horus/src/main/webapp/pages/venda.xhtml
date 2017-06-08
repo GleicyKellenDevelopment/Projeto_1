@@ -31,9 +31,9 @@
 						<h:outputText value="#{produto.qtd_estoque}" />
 					</p:column>
 
-					<p:column headerText="Preço" sortBy="#{produto.preco}"
-						filterBy="#{produto.preco}">
-						<h:outputText value="#{produto.preco}">
+					<p:column headerText="Preço" sortBy="#{produto.valor_unitario}"
+						filterBy="#{produto.valor_unitario}">
+						<h:outputText value="#{produto.valor_unitario}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 						</h:outputText>
 					</p:column>
@@ -65,7 +65,7 @@
 					</p:column>
 
 					<p:column headerText="Preço Un.">
-						<h:outputText value="#{pedido.produto.preco}">
+						<h:outputText value="#{pedido.produto.valor_unitario}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 						</h:outputText>
 					</p:column>

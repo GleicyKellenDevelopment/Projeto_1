@@ -24,7 +24,12 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 						</p:commandButton>
 					</f:facet>
-
+					
+					<p:column headerText="Nota Fiscal" sortBy="#{produto.nota_fiscal}"
+						filterBy="#{produto.nota_fiscal}">
+						<h:outputText value="#{produto.nota_fiscal}" />
+					</p:column>
+					
 					<p:column headerText="Nome" sortBy="#{produto.nome_produto}"
 						filterBy="#{produto.nome_produto}">
 						<h:outputText value="#{produto.nome_produto}" />
@@ -39,10 +44,17 @@
 						filterBy="#{produto.qtd_estoque}">
 						<h:outputText value="#{produto.qtd_estoque}" />
 					</p:column>
-
-					<p:column headerText="Preço" sortBy="#{produto.preco}"
-						filterBy="#{produto.preco}">
-						<h:outputText value="#{produto.preco}">
+					
+					<p:column headerText="Valor Compra" sortBy="#{produto.valor_compra}"
+						filterBy="#{produto.valor_compra}">
+						<h:outputText value="#{produto.valor_compra}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Valor Uni." sortBy="#{produto.valor_unitario}"
+						filterBy="#{produto.valor_unitario}">
+						<h:outputText value="#{produto.valor_unitario}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 						</h:outputText>
 					</p:column>
@@ -87,6 +99,14 @@
 			<h:form id="produtoForm">
 				<h:panelGrid columns="2" id="camposProduto">
 
+					<p:outputLabel for="nota" value="Nota Fiscal:" />
+					<p:inputText id="nota" size="20" maxlength="9"
+						value="#{produtoBean.produto.nota_fiscal}" required="true"
+						requiredMessage="Campo 'Nota Fiscal' é Obrigatório"
+						converterMessage="O valor no campo 'Número' é inválido">
+						<f:validateLongRange minimum="0" maximum="10000000000" />
+						</p:inputText>
+
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" size="20" maxlength="50"
 						value="#{produtoBean.produto.nome_produto}" required="true"
@@ -112,13 +132,23 @@
 						validatorMessage="O valor inserido no campo 'Quantidade' é inválido. ( 0 a 150 )">
 						<f:validateLongRange minimum="0" maximum="150" />
 					</p:inputText>
-
-					<p:outputLabel for="preco" value="Preço:" />
+					
+					<p:outputLabel for="preco" value="Valor Compra:" />
 					<p:inputText id="preco" size="20" maxlength="7"
-						value="#{produtoBean.produto.preco}" required="true"
-						requiredMessage="Campo 'Preço' é Obrigatório"
-						converterMessage="O valor no campo 'Preço' é inválido"
-						validatorMessage="O valor inserido no campo 'Preço' é inválido. ( 0.05 a 9999.99 )">
+						value="#{produtoBean.produto.valor_compra}" required="true"
+						requiredMessage="Campo 'Valor Compra' é Obrigatório"
+						converterMessage="O valor no campo 'Valor Compra' é inválido"
+						validatorMessage="O valor inserido no campo 'Valor Compra' é inválido. ( 0.05 a 9999.99 )">
+						<f:validateDoubleRange minimum="0.05" maximum="9999.99" />
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+										
+					<p:outputLabel for="v-uni" value="Valor Unitário:" />
+					<p:inputText id="v-uni" size="20" maxlength="7"
+						value="#{produtoBean.produto.valor_unitario}" required="true"
+						requiredMessage="Campo 'Valor Unitário' é Obrigatório"
+						converterMessage="O valor no campo 'Valor Unitário' é inválido"
+						validatorMessage="O valor inserido no campo 'Valor Unitário' é inválido. ( 0.05 a 9999.99 )">
 						<f:validateDoubleRange minimum="0.05" maximum="9999.99" />
 						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 					</p:inputText>
