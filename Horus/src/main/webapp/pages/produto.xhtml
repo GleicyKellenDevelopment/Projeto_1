@@ -13,23 +13,28 @@
 			<p:panel header="Listagem dos Produtos" class="top-tabelas">
 				<p:dataTable id="tabelaProdutos"
 					emptyMessage="Nenhum Registro Encontrado." paginator="true"
-					var="produto" rows="10" value="#{produtoBean.listarProdutos}" paginatorPosition="bottom">
+					var="produto" rows="10" value="#{produtoBean.listarProdutos}"
+					paginatorPosition="bottom">
 
 					<f:facet name="header">
-						<p:commandButton value="Adicionar"
+						<p:commandButton icon="ui-icon-plus"
 							actionListener="#{produtoBean.novo}"
 							update=":mensagem :produtoForm:camposProduto"
 							oncomplete="PF('adicionarProduto').show();">
 							<f:actionListener
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-print" style="margin-left:1rem;"
+							actionListener="#{produtoBean.imprimir}" />
+
 					</f:facet>
-					
+
 					<p:column headerText="Nota Fiscal" sortBy="#{produto.nota_fiscal}"
 						filterBy="#{produto.nota_fiscal}">
 						<h:outputText value="#{produto.nota_fiscal}" />
 					</p:column>
-					
+
 					<p:column headerText="Nome" sortBy="#{produto.nome_produto}"
 						filterBy="#{produto.nome_produto}">
 						<h:outputText value="#{produto.nome_produto}" />
@@ -44,15 +49,17 @@
 						filterBy="#{produto.qtd_estoque}">
 						<h:outputText value="#{produto.qtd_estoque}" />
 					</p:column>
-					
-					<p:column headerText="Valor Compra" sortBy="#{produto.valor_compra}"
+
+					<p:column headerText="Valor Compra"
+						sortBy="#{produto.valor_compra}"
 						filterBy="#{produto.valor_compra}">
 						<h:outputText value="#{produto.valor_compra}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 						</h:outputText>
 					</p:column>
-					
-					<p:column headerText="Valor Uni." sortBy="#{produto.valor_unitario}"
+
+					<p:column headerText="Valor Uni."
+						sortBy="#{produto.valor_unitario}"
 						filterBy="#{produto.valor_unitario}">
 						<h:outputText value="#{produto.valor_unitario}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
@@ -105,7 +112,7 @@
 						requiredMessage="Campo 'Nota Fiscal' é Obrigatório"
 						converterMessage="O valor no campo 'Número' é inválido">
 						<f:validateLongRange minimum="0" maximum="10000000000" />
-						</p:inputText>
+					</p:inputText>
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" size="20" maxlength="50"
@@ -132,7 +139,7 @@
 						validatorMessage="O valor inserido no campo 'Quantidade' é inválido. ( 0 a 150 )">
 						<f:validateLongRange minimum="0" maximum="150" />
 					</p:inputText>
-					
+
 					<p:outputLabel for="preco" value="Valor Compra:" />
 					<p:inputText id="preco" size="20" maxlength="7"
 						value="#{produtoBean.produto.valor_compra}" required="true"
@@ -142,7 +149,7 @@
 						<f:validateDoubleRange minimum="0.05" maximum="9999.99" />
 						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 					</p:inputText>
-										
+
 					<p:outputLabel for="v-uni" value="Valor Unitário:" />
 					<p:inputText id="v-uni" size="20" maxlength="7"
 						value="#{produtoBean.produto.valor_unitario}" required="true"
