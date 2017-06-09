@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-08T18:01:05 -->
+<!-- 2017-06-09T14:17:26 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estados" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c1f7fde-c161-47dd-b7da-3fe06dfe86cf">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="aG9ydXNiZC5lc3RhZG8gQVMgLDEyOCw3NSw3OWE2YTZmMS05NzU0LTQ1NzgtYjBlMC1jOWUxMTdj&#xA;ZjIwZjA7"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Horus Data Adapter "/>
@@ -16,16 +16,16 @@ FROM horusbd.estado]]>
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="75ef899b-8a70-4b2e-ab0c-5ffb8011c080"/>
 				<staticText>
-					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="120e3e9e-a900-45b0-8260-5cff12899630"/>
+					<reportElement x="20" y="10" width="380" height="53" forecolor="#FFFFFF" uuid="120e3e9e-a900-45b0-8260-5cff12899630"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Hórus Informática]]></text>
+					<text><![CDATA[HI - Hórus Informática]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="340" y="34" width="235" height="30" forecolor="#FFFFFF" uuid="06bdaed9-5954-41d5-881c-d1afb2b3518d"/>
+					<reportElement x="300" y="50" width="278" height="32" forecolor="#FFFFFF" uuid="06bdaed9-5954-41d5-881c-d1afb2b3518d"/>
 					<textElement textAlignment="Right">
-						<font fontName="SansSerif" size="18" isBold="false" isItalic="true"/>
+						<font fontName="SansSerif" size="20" isBold="false" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[Relatório de Estados]]></text>
 				</staticText>

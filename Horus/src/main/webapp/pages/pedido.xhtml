@@ -1,60 +1,88 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Hórus Informática</title>
-</h:head>
-<h:body>
-	<h:form>
-		<p:panel header="Listagem dos Pedidos">
-			<p:dataTable emptyMessage="Nenhum Registro Encontrado."
-				paginator="true">
-				<f:facet name="header">
-					<p:commandButton value="Adicionar"
-						oncomplete="PF('adicionarPedido').show();" />
-				</f:facet>
-				<p:column headerText="Produto"></p:column>
-				<p:column headerText="Quantidade"></p:column>
-				<p:column headerText="Venda"></p:column>
-				<p:column headerText="Valor Parcial"></p:column>
-				<p:column headerText="Opções"></p:column>
-			</p:dataTable>
-		</p:panel>
-	</h:form>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
 
-	<p:dialog header="Adicionar Pedido" widgetVar="adicionarPedido"
-		draggable="false" resizable="false" modal="true">
-		<h:form>
-			<h:panelGrid columns="2">
-				
-				<p:outputLabel value="Produto:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione um Produto:"/>
-				</p:selectOneMenu>
-				
-				<p:outputLabel value="Venda:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione a Venda:" />
-				</p:selectOneMenu>
-								
-				<p:outputLabel value="Quantidade:" />
-				<p:inputText size="20" maxlength="5" />
-				
-				<p:outputLabel value="Valor Parcial:" />
-				<p:inputText size="20" maxlength="7" />
-								
-			</h:panelGrid>
-			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
-				<p:commandButton value="Cancelar"
-					oncomplete="PF('adicionarPedido').hide();" />
-			</h:panelGrid>
+	<ui:define name="conteudo">
+
+		<h:form id="listagemPedidos">
+			<p:panel header="Listagem dos Pedidos" class="top-tabelas">
+
+				<p:dataTable id="tabelaPedidos"
+					emptyMessage="Nenhum Registro Encontrado." paginator="true"
+					var="pedido" rows="10" value="#{pedidoBean.listarPedidos}"
+					paginatorPosition="bottom">
+
+					<p:column headerText="Produto"
+						sortBy="#{pedido.produto.nome_produto}"
+						filterBy="#{pedido.produto.nome_produto}">
+						<h:outputText value="#{pedido.produto.nome_produto}" />
+					</p:column>
+
+					<p:column headerText="Marca"
+						sortBy="#{pedido.produto.marca.nome_marca}"
+						filterBy="#{pedido.produto.marca.nome_marca}">
+						<h:outputText value="#{pedido.produto.marca.nome_marca}" />
+					</p:column>
+
+					<p:column headerText="Quantidade" sortBy="#{pedido.quantidade}">
+						<h:outputText value="#{pedido.quantidade}" />
+					</p:column>
+
+					<p:column headerText="Cliente"
+						sortBy="#{pedido.venda.cliente.pessoa.nome}"
+						filterBy="#{pedido.venda.cliente.pessoa.nome}">
+						<h:outputText value="#{pedido.venda.cliente.pessoa.nome}" />
+					</p:column>
+
+					<p:column headerText="Funcionário"
+						sortBy="#{pedido.venda.funcionario.pessoa.nome}"
+						filterBy="#{pedido.venda.funcionario.pessoa.nome}">
+						<h:outputText value="#{pedido.venda.funcionario.pessoa.nome}" />
+					</p:column>
+
+					<p:column headerText="Dia" sortBy="#{pedido.venda.horario}">
+						<h:outputText value="#{pedido.venda.horario}">
+							<f:convertDateTime locale="pt_BR" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Valor Unitário" sortBy="#{pedido.preco_parcial}">
+						<h:outputText value="#{pedido.preco_parcial}" />
+					</p:column>
+
+					<p:column headerText="Opções">
+
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{pedidoBean.excluir}"
+							update=":mensagem :listagemPedidos:tabelaPedidos">
+
+							<p:confirm header="Excluir"
+								message="Deseja realmente excluir este Pedido?"
+								icon="ui-icon-alert" />
+
+							<f:attribute name="pedidoSelecionado" value="#{pedido}" />
+
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</p:panel>
 		</h:form>
-	</p:dialog>
 
-</h:body>
-</html>
+	</ui:define>
+
+</ui:composition>
