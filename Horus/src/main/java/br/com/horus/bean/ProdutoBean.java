@@ -125,7 +125,7 @@ public class ProdutoBean implements Serializable{
 			DataTable tabela = (DataTable) Faces.getViewRoot().findComponent("listagemProdutos:tabelaProdutos");
 			Map<String, Object> filtros = tabela.getFilters();
 
-			String proDescricao = (String) filtros.get("nome");
+			String proDescricao = (String) filtros.get("nome_produto");
 			String fabDescricao = (String) filtros.get("marca.nome_marca");
 
 			String caminho = Faces.getRealPath("/reports/produtos.jasper");
