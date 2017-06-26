@@ -1,3 +1,2 @@
-Este projeto foi baseado no modelo do Professor Sergio Roberto Delfino - Java para Web.(vídeo aulas disponíveis no Youtube)
-Foi adequado aos padrões para utilidade de um sistema de informática.
-Este projeto totalmente de carater educativo.
+O modelo do Projeto apresentado teve como base as aulas postadas no YouTube do Professor Sergio Roberto Delfino - Java para Web. O projeto é para conteúdo educacional e como forma de aprendizado voltado para o desenvolvimento web utilizando a linguagem Java.
+
