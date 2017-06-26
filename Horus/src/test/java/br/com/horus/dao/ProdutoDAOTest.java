@@ -13,16 +13,18 @@ import br.com.horus.model.Produto;
 
 public class ProdutoDAOTest {
 	@Test
-	@Ignore
+//	@Ignore
 	public void salvar() {
 		MarcaDAO marcaDAO = new MarcaDAO();
 		Marca marca = marcaDAO.buscar(1L);
 
 		Produto produto = new Produto();
+		produto.setNota_fiscal(123456789);
 		produto.setNome_produto("Carregador Televisor");
 		produto.setMarca(marca);
-		produto.setQtd_estoque(new Short("5"));
-		produto.setPreco(new BigDecimal("35.00"));
+		produto.setQtd_estoque(new Short("30"));
+		produto.setValor_compra(new BigDecimal("250.00"));
+		produto.setValor_unitario(new BigDecimal("35.00"));
 
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		produtoDAO.salvar(produto);
@@ -41,7 +43,7 @@ public class ProdutoDAOTest {
 
 			for (Produto produto : listarProdutos) {
 				System.out.println(produto.getNome_produto() + " - " + produto.getMarca().getNome_marca() + " - "
-						+ produto.getQtd_estoque() + " - " + produto.getPreco());
+						+ produto.getQtd_estoque() + " - " + produto.getValor_unitario());
 			}
 		}
 	}
@@ -57,7 +59,7 @@ public class ProdutoDAOTest {
 			System.out.println("NENHUM REGISTRO ENCONTRADO");
 		} else {
 			System.out.println(produto.getNome_produto() + " - " + produto.getMarca().getNome_marca() + " - "
-					+ produto.getQtd_estoque() + " - " + produto.getPreco());
+					+ produto.getQtd_estoque() + " - " + produto.getValor_unitario());
 		}
 	}
 

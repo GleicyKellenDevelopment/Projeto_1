@@ -1,102 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Hórus Informática</title>
-</h:head>
-<h:body>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
 
-	<p:growl id="mensagem" />
+	<ui:define name="conteudo">
 
-	<h:form id="listagemUsuarios">
-		<p:panel header="Listagem de Usuários">
-			<p:dataTable id="tabelaUsuarios"
-				emptyMessage="Nenhum Registro Encontrado." paginator="true"
-				value="#{usuarioBean.listarUsuarios}" rows="5" var="usuario">
+		<h:form id="listagemUsuarios">
+			<p:panel header="Listagem de Usuários" class="top-tabelas">
+				<p:dataTable id="tabelaUsuarios"
+					emptyMessage="Nenhum Registro Encontrado." paginator="true"
+					value="#{usuarioBean.listarUsuarios}" rows="5" var="usuario">
 
-				<f:facet name="header">
-					<p:commandButton value="Adicionar"
-						actionListener="#{usuarioBean.novo}"
-						update=":mensagem :usuarioForm:camposUsuario"
-						oncomplete="PF('adicionarUsuario').show();">
-						<f:actionListener
-							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-					</p:commandButton>
-				</f:facet>
+					<f:facet name="header">
+						<p:commandButton value="Adicionar"
+							actionListener="#{usuarioBean.novo}"
+							update=":mensagem :usuarioForm:camposUsuario"
+							oncomplete="PF('adicionarUsuario').show();">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+					</f:facet>
 
-				<p:column headerText="Nome" sortBy="#{usuario.pessoa.nome}"
-					filterBy="#{usuario.pessoa.nome}">
-					<h:outputText value="#{usuario.pessoa.nome}" />
-				</p:column>
+					<p:column headerText="Nome" sortBy="#{usuario.pessoa.nome}"
+						filterBy="#{usuario.pessoa.nome}">
+						<h:outputText value="#{usuario.pessoa.nome}" />
+					</p:column>
 
-				<p:column headerText="Email">
-					<h:outputText value="#{usuario.pessoa.email}" />
-				</p:column>
+					<p:column headerText="Email">
+						<h:outputText value="#{usuario.pessoa.email}" />
+					</p:column>
 
-				<p:column headerText="Tipo" sortBy="#{usuario.tipoFormatado}"
-					filterBy="#{usuario.tipoFormatado}">
-					<h:outputText value="#{usuario.tipoFormatado}" />
-				</p:column>
+					<p:column headerText="Tipo" sortBy="#{usuario.tipoFormatado}"
+						filterBy="#{usuario.tipoFormatado}">
+						<h:outputText value="#{usuario.tipoFormatado}" />
+					</p:column>
 
-				<p:column headerText="Ativo">
-					<h:outputText value="#{usuario.ativoFormatado}" />
-				</p:column>
+					<p:column headerText="Ativo">
+						<h:outputText value="#{usuario.ativoFormatado}" />
+					</p:column>
 
-				<p:column headerText="Opções"></p:column>
+					<p:column headerText="Opções"></p:column>
 
-			</p:dataTable>
-		</p:panel>
-	</h:form>
-
-	<p:dialog header="Adicionar Usuário" widgetVar="adicionarUsuario"
-		draggable="false" resizable="false" modal="true">
-		<h:form id="usuarioForm">
-			<h:panelGrid id="camposUsuario" columns="2">
-
-				<p:outputLabel for="usuario" value="Usuário:" />
-				<p:selectOneMenu id="usuario" filter="true" required="true"
-					requiredMessage="O campo 'Usuário' é Obrigatório."
-					converter="omnifaces.SelectItemsConverter"
-					value="#{usuarioBean.usuario.pessoa}">
-					<f:selectItem noSelectionOption="true"
-						itemLabel="Selecione um Usuário:" />
-					<f:selectItems value="#{usuarioBean.listarPessoas}" var="pessoa"
-						itemLabel="#{pessoa.nome} - #{pessoa.cpf}" itemValue="#{pessoa}" />
-				</p:selectOneMenu>
-
-				<p:outputLabel for="senha" value="Senha:" />
-				<p:password id="senha" maxlength="8" size="20"
-					value="#{usuarioBean.usuario.senha}" required="true"
-					requiredMessage="O campo 'Senha' é Obrigatório."
-					validatorMessage="Informe uma senha de 6 a 8 caracteres">
-					<f:validateLength minimum="6" maximum="10" />
-				</p:password>
-
-				<p:outputLabel for="tipo" value="Tipo:" />
-				<p:selectOneRadio id="tipo"
-					value="#{usuarioBean.usuario.tipoUsuario}" required="true"
-					requiredMessage="O campo 'Tipo' é Obrigatório.">
-					<f:selectItem itemValue="A" itemLabel="Administrador" />
-					<f:selectItem itemValue="G" itemLabel="Gerente" />
-					<f:selectItem itemValue="F" itemLabel="Funcionário" />
-				</p:selectOneRadio>
-
-				<p:outputLabel value="Ativo:" />
-				<p:selectBooleanCheckbox 
-					value="#{usuarioBean.usuario.ativo}"/>
-			</h:panelGrid>
-			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar}"
-				update=":mensagem :usuarioForm:camposUsuario :listagemUsuarios:tabelaUsuarios"/>
-				<p:commandButton value="Cancelar"
-					oncomplete="PF('adicionarUsuario').hide();" />
-			</h:panelGrid>
+				</p:dataTable>
+			</p:panel>
 		</h:form>
-	</p:dialog>
 
-</h:body>
-</html>
+		<p:dialog header="Adicionar Usuário" widgetVar="adicionarUsuario"
+			draggable="false" resizable="false" modal="true">
+			<h:form id="usuarioForm">
+				<h:panelGrid id="camposUsuario" columns="2">
+
+					<p:outputLabel for="usuario" value="Usuário:" />
+					<p:selectOneMenu id="usuario" filter="true" required="true"
+						requiredMessage="O campo 'Usuário' é Obrigatório."
+						converter="omnifaces.SelectItemsConverter"
+						value="#{usuarioBean.usuario.pessoa}">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um Usuário:" />
+						<f:selectItems value="#{usuarioBean.listarPessoas}" var="pessoa"
+							itemLabel="#{pessoa.nome} - #{pessoa.cpf}" itemValue="#{pessoa}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="senha" value="Senha:" />
+					<p:password id="senha" maxlength="8" size="20"
+						value="#{usuarioBean.usuario.senha}" required="true"
+						requiredMessage="O campo 'Senha' é Obrigatório."
+						validatorMessage="Informe uma senha de 6 a 8 caracteres">
+						<f:validateLength minimum="6" maximum="10" />
+					</p:password>
+
+					<p:outputLabel for="tipo" value="Tipo:" />
+					<p:selectOneRadio id="tipo"
+						value="#{usuarioBean.usuario.tipoUsuario}" required="true"
+						requiredMessage="O campo 'Tipo' é Obrigatório.">
+						<f:selectItem itemValue="A" itemLabel="Administrador" />
+						<f:selectItem itemValue="G" itemLabel="Gerente" />
+						<f:selectItem itemValue="F" itemLabel="Funcionário" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="Ativo:" />
+					<p:selectBooleanCheckbox value="#{usuarioBean.usuario.ativo}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{usuarioBean.salvar}"
+						update=":mensagem :usuarioForm:camposUsuario :listagemUsuarios:tabelaUsuarios" />
+					<p:commandButton value="Cancelar"
+						oncomplete="PF('adicionarUsuario').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+	
+</ui:composition>

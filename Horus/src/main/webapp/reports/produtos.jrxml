@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-06-10T00:01:18 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="produtos" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c4b53d66-05df-415a-976f-146db019bed7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Horus Data Adapter "/>
+	<parameter name="PRODUTO_NOME" class="java.lang.String"/>
+	<parameter name="MARCA_NOME" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT horusbd.produto.nome_produto,
+	horusbd.produto.nota_fiscal,
+	horusbd.produto.qtd_estoque,
+	horusbd.produto.valor_compra,
+	horusbd.produto.valor_unitario,
+	horusbd.marca.nome_marca
+FROM horusbd.produto
+	INNER JOIN horusbd.marca ON 
+	 horusbd.produto.marca_id = horusbd.marca.id 
+WHERE 
+	 horusbd.produto.nome_produto LIKE $P{PRODUTO_NOME} 
+	 AND horusbd.marca.nome_marca LIKE $P{MARCA_NOME} 
+ORDER BY horusbd.produto.nome_produto ASC,
+	horusbd.marca.nome_marca ASC]]>
+	</queryString>
+	<field name="nome_produto" class="java.lang.String"/>
+	<field name="nota_fiscal" class="java.lang.Integer"/>
+	<field name="qtd_estoque" class="java.lang.Integer"/>
+	<field name="valor_compra" class="java.math.BigDecimal"/>
+	<field name="valor_unitario" class="java.math.BigDecimal"/>
+	<field name="nome_marca" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="6808bc27-237b-4b5f-951c-693a62480bc0"/>
+				<staticText>
+					<reportElement x="20" y="20" width="370" height="43" forecolor="#FFFFFF" uuid="342ff38b-dd11-427e-a5cd-1c869f9c481b"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[HI - Hórus Informática]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="370" y="60" width="205" height="26" forecolor="#FFFFFF" uuid="37dbaa39-8f35-4434-bb42-3d1636cf1b5f"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="18" isBold="false" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Relatório de Produtos]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="f1fc52d4-7c81-4724-aacb-8326afede0ed"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="103" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5721fe35-c5ab-4a33-a611-6dcd47fb19ec"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="101" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e0e76283-88ef-4bc9-8371-abb3819fe2b3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nota Fiscal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="194" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="edff4ced-c95f-4063-b0d8-37bfe45832cb"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTD Estoque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="286" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b6268ddb-0622-4457-b486-ccdedda515f2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="376" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e2aa259c-368d-403d-a58a-996e5afee21c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Preço UNID.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="464" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c2b1f2bc-08bb-4976-94c4-06695f5d1eba"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="23" width="555" height="1" uuid="d09530e7-265e-417d-b336-7b4f580bb292"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="0" width="102" height="20" uuid="a4437e90-a1a4-492e-b56b-428d26180064"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_produto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="100" y="0" width="92" height="20" uuid="fe4afcec-c95e-42a5-af32-dcb0fb53d05a"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nota_fiscal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="188" y="0" width="92" height="20" uuid="d2018f9e-9b8f-40c1-b365-8c4ea3f8e1d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtd_estoque}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="287" y="0" width="92" height="20" uuid="6d9b3a9b-f5c4-48ac-a16f-dbb108db9c7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_compra}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="378" y="0" width="92" height="20" uuid="8282372f-31b2-4a04-8f15-78229ac188a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_unitario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="463" y="0" width="92" height="20" uuid="35bcd9ba-6247-4a31-b34d-c391e40fdbbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome_marca}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Transparent" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="6e533640-f4c4-4133-afd5-62132a60db80"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Transparent" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="e825a158-090c-47f5-8dbf-fe6b6fe8a411"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="ac212556-ba17-4f82-81ad-f5ed09b6641f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
